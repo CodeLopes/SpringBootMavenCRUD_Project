@@ -1,0 +1,16 @@
+package br.com.ironmountain.cadastroclientes;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
+
+@SpringBootApplication
+@Controller
+public class Config {
+	String msg() {
+		return "IRON MOUNTAIN - Client System";
+	}
+	public static void main(String[] args) {
+		SpringApplication.run(Config.class, args);
+	}
+}

@@ -1,0 +1,64 @@
+package br.com.ironmountain.cadastroclientes;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+
+import br.com.ironmountain.cadastroclientes.model.Cliente;
+import br.com.ironmountain.cadastroclientes.repository.ClienteRepository;
+
+@Controller
+public class ClienteController {
+	
+	@Autowired
+	private ClienteRepository repository;
+	
+	@RequestMapping("/")
+	public String index(){
+		return "index";
+	}
+	
+	@RequestMapping("cadastrocliente")
+	public String cadastroCliente(Model model){
+		
+		Iterable<Cliente> clientes = repository.findAll();
+		
+		model.addAttribute("clientes", clientes);
+		
+		return "cadastrocliente";
+	}
+	
+	@Configuration
+	public class ThymeleafConfig {
+	    @Bean
+	    public SpringResourceTemplateResolver templateResolver() {
+	        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+	        templateResolver.setCacheable(false);
+	        templateResolver.setPrefix("classpath:/templates/");
+	        templateResolver.setSuffix(".html");
+	        return templateResolver;
+	    }
+
+	    @Bean
+	    public SpringTemplateEngine templateEngine() {
+	        SpringTemplateEngine springTemplateEngine = new SpringTemplateEngine();
+	        springTemplateEngine.addTemplateResolver(templateResolver());
+	        return springTemplateEngine;
+	    }
+
+	    @Bean
+	    public ThymeleafViewResolver viewResolver() {
+	        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+	        viewResolver.setTemplateEngine(templateEngine());
+	        viewResolver.setOrder(1);
+	        return viewResolver;
+	    }
+	}
+
+}

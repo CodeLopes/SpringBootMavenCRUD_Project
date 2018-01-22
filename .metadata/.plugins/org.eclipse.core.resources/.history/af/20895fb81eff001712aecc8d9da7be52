@@ -1,0 +1,5 @@
+package br.com.ironmountain.cadastroclientes.model;
+
+public class Cliente {
+
+}

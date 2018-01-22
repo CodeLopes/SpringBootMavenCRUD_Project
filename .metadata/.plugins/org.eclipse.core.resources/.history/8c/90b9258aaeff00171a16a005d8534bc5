@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Cadastro Clientes</title>
+
+</head>
+<body>
+
+	
+
+		<div id="CadastroDeClientes">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Email</th>
+						<th>Telefone</th>
+					</tr>
+				</thead>
+				<tr th:each="cliente : ${clientes}">
+					<td><span th:text="${cliente.nome}"></span></td>
+					<td><span th:text="${cliente.email}"></span></td>
+					<td><span th:text="${cliente.telefone}"></span></td>
+				</tr>
+
+			</table>
+		</div>
+		
+		
+
+	
+
+</body>
+</html>
